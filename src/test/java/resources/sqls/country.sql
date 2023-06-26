@@ -1,0 +1,1 @@
+insert into pais (id_pais, nome_pais) values (1, 'Brasil'), (2, 'Equador'), (3, 'Grécia');

@@ -1,0 +1,1 @@
+insert into piloto (id_piloto, name, team_id_equipe, country_id_pais)values (1, 'Piloto 1', 1, 1);

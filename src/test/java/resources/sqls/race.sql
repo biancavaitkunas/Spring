@@ -1,0 +1,1 @@
+insert into corrida (id_corrida, dateint, championship_id_campeonato, speedway_id_pista)values (1, '21/08/2004', 1, 1);

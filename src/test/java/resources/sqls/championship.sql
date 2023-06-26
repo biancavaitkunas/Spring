@@ -1,0 +1,1 @@
+insert into campeonato (id_campeonato, descricao, ano) values (1, 'Campeonato 1', 2015), (2, 'Campeonato 2', 2017), (3, 'Novo Campeonato', 2020);
