@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class PilotResource {
 	@Autowired
 	private TeamService teamService;
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping
 	public ResponseEntity<PilotDTO> insert (@RequestBody PilotDTO pilotDTO) {
 		return ResponseEntity.ok(service.save(new Pilot(pilotDTO.getId(),
@@ -38,31 +40,37 @@ public class PilotResource {
 				teamService.findById(pilotDTO.getTeam().getId()))).ToDTO());
 	}
 	
+	@Secured({"ROLE_USER"})
 	@GetMapping("/{id}")
 	public ResponseEntity<PilotDTO> findById (@PathVariable Integer id) {
 		return ResponseEntity.ok(service.findById(id).ToDTO());
 	}
 	
+	@Secured({"ROLE_USER"})
 	@GetMapping
 	public ResponseEntity<List<PilotDTO>> listAll(){
 		return ResponseEntity.ok(service.listAll().stream().map((pilot) -> pilot.ToDTO()).toList());
 	}
 	
+	@Secured({"ROLE_USER"})
 	@GetMapping("/nome/{name}")
 	public ResponseEntity<List<PilotDTO>> findByName(@PathVariable String name){
 		return ResponseEntity.ok(service.findByName(name).stream().map((pilot) -> pilot.ToDTO()).toList());
 	}
 	
+	@Secured({"ROLE_USER"})
 	@GetMapping("/pais/{idPais}")
 	public ResponseEntity<List<PilotDTO>> findByCountry(@PathVariable Integer idCountry){
 		return ResponseEntity.ok(service.findByCountry(countryService.findById(idCountry)).stream().map((piloto) -> piloto.ToDTO()).toList());
 	}
 	
+	@Secured({"ROLE_USER"})
 	@GetMapping("/equipe/{idEquipe}")
 	public ResponseEntity<List<PilotDTO>> findByTeam(@PathVariable Integer idTeam){
 		return ResponseEntity.ok(service.findByTeam(teamService.findById(idTeam)).stream().map((piloto) -> piloto.ToDTO()).toList());
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/{id}")
 	public ResponseEntity<PilotDTO> update (@PathVariable Integer id, @RequestBody PilotDTO pilotoDTO) {
 		Pilot pilot = new Pilot(pilotoDTO);
@@ -71,6 +79,7 @@ public class PilotResource {
 		
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete (@PathVariable Integer id) {
 		service.delete(id);

@@ -32,7 +32,7 @@ import br.com.trier.spring.services.CountryService;
 
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = Replace.ANY)
-@Sql(executionPhase=ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/resources/sqls/piloto.sql")
+@Sql(executionPhase=ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/resources/sqls/pilot.sql")
 @Sql(executionPhase=ExecutionPhase.AFTER_TEST_METHOD,scripts="classpath:/resources/sqls/limpa_tabelas.sql")
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PilotoResourceTest {
@@ -59,9 +59,9 @@ public class PilotoResourceTest {
 	@Test
 	@DisplayName("Buscar por id")
 	@Sql({"classpath:/resources/sqls/limpa_tabelas.sql"})
-	@Sql({"classpath:/resources/sqls/equipe.sql"})
-	@Sql({"classpath:/resources/sqls/pais.sql"})
-	@Sql({"classpath:/resources/sqls/piloto.sql"})
+	@Sql({"classpath:/resources/sqls/team.sql"})
+	@Sql({"classpath:/resources/sqls/country.sql"})
+	@Sql({"classpath:/resources/sqls/pilot.sql"})
 	public void testGetOk() {
 		ResponseEntity<RaceDTO> response = getCorrida("/corrida/1");
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -73,8 +73,8 @@ public class PilotoResourceTest {
 	@Test
 	@DisplayName("Cadastrar piloto")
 	
-	@Sql({"classpath:/resources/sqls/pais.sql"})
-	@Sql({"classpath:/resources/sqls/equipe.sql"})
+	@Sql({"classpath:/resources/sqls/country.sql"})
+	@Sql({"classpath:/resources/sqls/team.sql"})
 	public void testCreateCorrida() {
 		Pilot dto = new Pilot(1, "Piloto 1", paisService.findById(1), equipeService.findById(1));
 		HttpHeaders headers = new HttpHeaders();
@@ -88,8 +88,8 @@ public class PilotoResourceTest {
 	
 	@Test
 	@DisplayName("Alterar piloto")
-	@Sql({"classpath:/resources/sqls/pais.sql"})
-	@Sql({"classpath:/resources/sqls/equipe.sql"})
+	@Sql({"classpath:/resources/sqls/country.sql"})
+	@Sql({"classpath:/resources/sqls/team.sql"})
 	public void testAlterPiloto() {
 		Pilot dto = new Pilot(1, "Piloto Novo", paisService.findById(1), equipeService.findById(1));
 		HttpHeaders headers = new HttpHeaders();

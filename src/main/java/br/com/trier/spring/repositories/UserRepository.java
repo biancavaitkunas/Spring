@@ -1,6 +1,7 @@
 package br.com.trier.spring.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,9 @@ import br.com.trier.spring.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	List <User> findByNameStartingWithIgnoreCase(String name);
-	User findByEmail(String email);
+	Optional<User> findByEmail(String email);
+	Optional<User> findByEmailAndPassword(String email, String password);
+	Optional<User> findByName(String name);
+
 
 }

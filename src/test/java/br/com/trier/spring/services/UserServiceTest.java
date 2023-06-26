@@ -58,7 +58,7 @@ public class UserServiceTest extends BaseTests {
 	@Test
 	@DisplayName("Teste inserir usuário")
 	void insertUserTest() {
-		User u = new User(null, "Bianca", "bianca@gmail.com", "bianca123");
+		User u = new User(null, "Bianca", "bianca@gmail.com", "bianca123", "ADMIN");
 		userService.salvar(u);
 		u = userService.findById(1);
 		assertThat(u).isNotNull();
@@ -73,7 +73,7 @@ public class UserServiceTest extends BaseTests {
 	@DisplayName("Teste alterar usuários")
 	@Sql({"classpath:/resources/sqls/usuario.sql"})
 	void alterUserTest() {
-		var u = new User(1, "altera", "altera@gmail.com", "altera");
+		var u = new User(1, "altera", "altera@gmail.com", "altera", "ADMIN");
 		userService.update(u);
 		u = userService.findById(1);
 		assertThat(u).isNotNull();
@@ -128,7 +128,7 @@ public class UserServiceTest extends BaseTests {
 	@DisplayName("Teste salvar usuário com email já existente")
 	@Sql({"classpath:/resources/sqls/usuario.sql"})
 	void insertExistingEmailTest() {
-		var user = new User (3, "Novo Usuraio", "larissa@gmail.com", "456");
+		var user = new User (3, "Novo Usuraio", "larissa@gmail.com", "456", "ADMIN");
 		var exception = assertThrows(IntegrityViolation.class, () -> userService.salvar(user));
 		assertEquals("Email larissa@gmail.com já existe", exception.getMessage());
 		List<User> lista = userService.listAll();

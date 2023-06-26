@@ -2,7 +2,14 @@ package br.com.trier.spring.resources;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+import java.util.Date;
+
 import java.util.List;
+import java.security.Key;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +42,26 @@ public class UserResourceTest {
 	@Autowired
 	protected TestRestTemplate rest;//possui prot http, cria estrutura de pagina
 	
+	String chaveSecreta = "oratoroeuaroupadoreideromaarainhamatouorato";
+
+	
+	private String gerarTokenJwt() {
+		Key chaveSecreta = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+	    Date agora = new Date();
+	    Date expiracao = new Date(agora.getTime() + 3600000);
+	    
+	    String token = Jwts.builder()
+	            .setSubject("Email")
+	            .setIssuedAt(agora)
+	            .setExpiration(expiracao)
+	            .signWith(SignatureAlgorithm.HS512, chaveSecreta)
+	            .compact();
+	    
+	    return token;
+	}
+	
+
+
 	private ResponseEntity<UserDTO> getUser(String url) {//converte p dto - n é necessario poderia adicionar o rest.getForEntity(url, UserDTO.class);
 		return rest.getForEntity(url, UserDTO.class);
 	}
@@ -68,8 +95,10 @@ public class UserResourceTest {
 	@DisplayName("Cadastrar usuário")
 	@Sql({"classpath:/resources/sqls/limpa_tabelas.sql"})
 	public void testCreateUser() {
-		UserDTO dto = new UserDTO(null, "Nome", "Email", "Senha");
+		UserDTO dto = new UserDTO(null, "Nome", "Email", "Senha", "ADMIN");
+		String tokenJwt = gerarTokenJwt();
 		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Bearer " + tokenJwt);
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<UserDTO> requestEntity = new HttpEntity<>(dto, headers);
 		ResponseEntity<UserDTO> responseEntity = rest.exchange("/usuario", HttpMethod.POST, requestEntity, UserDTO.class);
@@ -81,7 +110,7 @@ public class UserResourceTest {
 	@Test
 	@DisplayName("Alterar usuário")
 	public void testAlterUser() {
-		UserDTO dto = new UserDTO(null, "Nome", "Email", "Senha");
+		UserDTO dto = new UserDTO(null, "Nome", "Email", "Senha", "ADMIN");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<UserDTO> requestEntity = new HttpEntity<>(dto, headers);
