@@ -1,2 +1,2 @@
-insert into usuario(id_usuario, email_usuario, nome_usuario, senha_usuario) values (1, 'pedro@gmail.com', 'Pedro', 'pedro123'), 
-(2, 'larissa@gmail.com', 'Larissa', 'larissa123');
+insert into usuario(id_usuario, email_usuario, nome_usuario, senha_usuario, permissoes_usuario) values (3, 'pedro@gmail.com', 'Pedro', 'pedro123', 'ADMIN,USER'), 
+(2, 'larissa@gmail.com', 'Larissa', 'larissa123', 'USER');
