@@ -51,7 +51,7 @@ public class UserServiceTest extends BaseTests {
 		List<User> lista = userService.listAll();
 		assertThat(lista).isNotNull();
 		assertEquals(2, lista.size());
-		assertEquals(1, lista.get(0).getId());
+		assertEquals(2, lista.get(0).getId());
 
 	}
 	

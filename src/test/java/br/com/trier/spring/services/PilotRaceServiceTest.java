@@ -1,6 +1,7 @@
 package br.com.trier.spring.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
 import br.com.trier.spring.BaseTests;
-import br.com.trier.spring.domain.Pilot;
 import br.com.trier.spring.domain.PilotRace;
 import br.com.trier.spring.services.exceptions.ObjectNotFound;
 

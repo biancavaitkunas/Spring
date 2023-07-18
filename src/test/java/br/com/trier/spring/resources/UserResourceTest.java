@@ -35,30 +35,12 @@ import br.com.trier.spring.domain.dto.UserDTO;
 
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = Replace.ANY)
-@Sql(executionPhase=ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/resources/sqls/usuario.sql")
-@Sql(executionPhase=ExecutionPhase.AFTER_TEST_METHOD,scripts="classpath:/resources/sqls/limpa_tabelas.sql")
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserResourceTest {
 	
 	@Autowired
 	protected TestRestTemplate rest;//possui prot http, cria estrutura de pagina
 	
-	/*String chaveSecreta = "oratoroeuaroupadoreideromaarainhamatouorato";
-
-	private String gerarTokenJwt() {
-		Key chaveSecreta = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-	    Date agora = new Date();
-	    Date expiracao = new Date(agora.getTime() + 3600000);
-	    
-	    String token = Jwts.builder()
-	            .setSubject("Email")
-	            .setIssuedAt(agora)
-	            .setExpiration(expiracao)
-	            .signWith(SignatureAlgorithm.HS512, chaveSecreta)
-	            .compact();
-	    
-	    return token;
-	}*/
 	
 	private HttpHeaders getHeaders(String email, String password) {
 		LoginDTO loginDTO = new LoginDTO(email, password);
@@ -114,8 +96,10 @@ public class UserResourceTest {
 	@Sql({"classpath:/resources/sqls/limpa_tabelas.sql"})
 	@Sql({"classpath:/resources/sqls/usuario.sql"})
 	public void findByNameTest() {
-		ResponseEntity<List<UserDTO>> response = getUsers("/usuario/nome/pedro");
+		ResponseEntity<List<UserDTO>> response = getUsers("/usuario/nome/Pedro");
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		List<UserDTO> user = response.getBody();
+		assertEquals("Pedro", user.get(0).getName());
 		assertEquals(2, response.getBody().size());
 	}
 	

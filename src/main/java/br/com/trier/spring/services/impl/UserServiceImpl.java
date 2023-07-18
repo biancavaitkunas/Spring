@@ -61,10 +61,15 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	private void findByEmail(User obj) {
-		Optional<User> user = repository.findByEmail(obj.getEmail());
-		if (user != null && user.get().getId() != obj.getId()) {
+		User busca = repository.findByEmail(obj.getEmail()).orElse(null);
+		if (busca != null && !busca.getId().equals(obj.getId())) {
 			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
 		}
+		
+		/*Optional<User> user = repository.findByEmail(obj.getEmail());
+		if (user != null && user.get().getId() != obj.getId()) {
+			throw new IntegrityViolation("Email %s já existe".formatted(obj.getEmail()));
+		}*/
 	}
 
 }
