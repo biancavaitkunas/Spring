@@ -58,6 +58,17 @@ public class SpeedwayServiceTest extends BaseTests{
 	}
 	
 	@Test
+	@DisplayName("Teste buscar pista por pais")
+	@Sql({"classpath:/resources/sqls/country.sql"})
+	@Sql({"classpath:/resources/sqls/speedway.sql"})
+	void findByCountryTest() {
+		var country = countryService.findById(1);
+		var speedway = countryService.findById(1);
+		assertEquals(1, speedway.getId());
+		assertEquals("Brasil", country.getName());
+	}
+	
+	@Test
 	@DisplayName("Teste alterar pista")
 	@Sql({"classpath:/resources/sqls/country.sql"})
 	@Sql({"classpath:/resources/sqls/speedway.sql"})

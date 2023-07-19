@@ -50,7 +50,7 @@ public class CountryResource {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete (@RequestBody Integer id){
+	public ResponseEntity<Void> delete (@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.ok().build();
 	}

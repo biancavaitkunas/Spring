@@ -42,17 +42,17 @@ public class ChampionshipResource {
 		return ResponseEntity.ok(service.listAll());
 	}
 	
-	@GetMapping("/ano/{ano}")
+	@GetMapping("/ano/{year}")
 	public ResponseEntity<List<Championship>> findByYear(@PathVariable Integer year){
 		return ResponseEntity.ok(service.findByYear(year));
 	}
 	
-	@GetMapping("/descricao/{descricao}")
+	@GetMapping("/descricao/{description}")
 	public ResponseEntity<List<Championship>> findByDescricaoStartingWithIgnoreCase(@PathVariable String description){
 		return ResponseEntity.ok(service.findByDescriptionStartingWithIgnoreCase(description));
 	}
 	
-	@GetMapping("/anos/{anoInicial}/{anoFinal}")
+	@GetMapping("/anos/{inicialYear}/{finalYear}")
 	public ResponseEntity<List<Championship>> findByYearBetween(@PathVariable Integer inicialYear, @PathVariable Integer finalYear){
 		return ResponseEntity.ok(service.findByYearBetween(inicialYear, finalYear));
 	}

@@ -43,13 +43,13 @@ public class SpeedwayResource {
 	}
 	
 	@GetMapping("/tamanho/{inicialSize}/{finalSize}")
-	public ResponseEntity<List<Speedway>> findBySizeBetween(@PathVariable Integer inicalSize, @PathVariable Integer finalSize){
-		return ResponseEntity.ok(service.findBySizeBetween(inicalSize, finalSize));
+	public ResponseEntity<List<Speedway>> findBySizeBetween(@PathVariable Integer inicialSize, @PathVariable Integer finalSize){
+		return ResponseEntity.ok(service.findBySizeBetween(inicialSize, finalSize));
 	}
 	
-	@GetMapping("/pais/{idpais}")
-	public ResponseEntity<List<Speedway>> findByCountryOrderBySizeDesc(@PathVariable Integer idSpeedway){
-		return ResponseEntity.ok(service.findByCountryOrderBySizeDesc(countryService.findById(idSpeedway)));
+	@GetMapping("/pais/{idCountry}")
+	public ResponseEntity<List<Speedway>> findByCountryOrderBySizeDesc(@PathVariable Integer idCountry){
+		return ResponseEntity.ok(service.findByCountryOrderBySizeDesc(countryService.findById(idCountry)));
 	}
 	
 	@GetMapping("/nome/{name}")

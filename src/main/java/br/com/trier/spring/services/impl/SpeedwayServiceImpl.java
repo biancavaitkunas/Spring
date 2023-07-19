@@ -70,10 +70,10 @@ public class SpeedwayServiceImpl implements SpeedwayService{
 	}
 
 	@Override
-	public List<Speedway> findByCountryOrderBySizeDesc(Country country) {
-		List<Speedway> lista = repository.findByCountryOrderBySizeDesc(country);
+	public List<Speedway> findByCountryOrderBySizeDesc(Country idCountry) {
+		List<Speedway> lista = repository.findByCountryOrderBySizeDesc(idCountry);
 		if(lista.size() == 0) {
-			throw new ObjectNotFound("Nenhuma pista no país".formatted(country));
+			throw new ObjectNotFound("Nenhuma pista no país".formatted(idCountry));
 		}
 		return lista;
 	}
