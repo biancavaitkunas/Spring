@@ -12,7 +12,7 @@ import br.com.trier.spring.domain.Speedway;
 @Repository
 public interface SpeedwayRepository extends JpaRepository<Speedway, Integer>{
 	
-	List<Speedway> findByName(String name);
+	List<Speedway> findByNameStartingWithIgnoreCase(String name);
 	List<Speedway> findBySizeBetween(Integer inicialSize, Integer finalSize);
 	List <Speedway> findByCountryOrderBySizeDesc(Country country);
 

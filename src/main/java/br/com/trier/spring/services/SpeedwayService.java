@@ -12,7 +12,7 @@ public interface SpeedwayService {
 	Speedway findById(Integer id);
 	Speedway update(Speedway speedway);
 	void delete(Integer id);
-	List<Speedway> findByName(String name);
+	List<Speedway> findByNameStartingWithIgnoreCase(String name);
 	List<Speedway> findBySizeBetween(Integer inicialSize, Integer finalSize);
 	List <Speedway> findByCountryOrderBySizeDesc(Country country);
 

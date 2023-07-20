@@ -79,8 +79,8 @@ public class SpeedwayServiceImpl implements SpeedwayService{
 	}
 
 	@Override
-	public List<Speedway> findByName(String name) {
-		List<Speedway> list = repository.findByName(name);
+	public List<Speedway> findByNameStartingWithIgnoreCase(String name) {
+		List<Speedway> list = repository.findByNameStartingWithIgnoreCase(name);
 		if (list.size() == 0) {
 			throw new ObjectNotFound("Nenhuma pista %s encontrada".formatted(name));
 		}

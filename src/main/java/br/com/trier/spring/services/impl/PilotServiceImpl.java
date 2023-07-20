@@ -55,8 +55,8 @@ public class PilotServiceImpl implements PilotService{
 	}
 
 	@Override
-	public List<Pilot> findByName(String name) {
-		List<Pilot> lista = repository.findByName(name);
+	public List<Pilot> findByNameStartingWithIgnoreCase(String name) {
+		List<Pilot> lista = repository.findByNameStartingWithIgnoreCase(name);
 		if(lista.size() == 0) {
 			throw new ObjectNotFound("Nome %s não encontrado".formatted(name));
 		}

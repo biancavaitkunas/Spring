@@ -45,6 +45,16 @@ public class PilotServiceTest extends BaseTests{
 	@Sql({"classpath:/resources/sqls/team.sql"})
 	@Sql({"classpath:/resources/sqls/country.sql"})
 	@Sql({"classpath:/resources/sqls/pilot.sql"})
+	void findByNameTest() {
+		List<Pilot> list = service.findByNameStartingWithIgnoreCase("piloto 1");
+		assertEquals(1, list.size());
+	}
+	
+	@Test
+	@DisplayName("Teste buscar piloto por ID")
+	@Sql({"classpath:/resources/sqls/team.sql"})
+	@Sql({"classpath:/resources/sqls/country.sql"})
+	@Sql({"classpath:/resources/sqls/pilot.sql"})
 	void findByIdTest() {
 		var piloto = service.findById(1);
 		assertEquals(1, piloto.getId());

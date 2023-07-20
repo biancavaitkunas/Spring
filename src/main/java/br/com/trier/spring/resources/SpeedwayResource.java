@@ -54,7 +54,7 @@ public class SpeedwayResource {
 	
 	@GetMapping("/nome/{name}")
 	public ResponseEntity<List<Speedway>> findByName(@PathVariable String name){
-		return ResponseEntity.ok(service.findByName(name));
+		return ResponseEntity.ok(service.findByNameStartingWithIgnoreCase(name));
 	}
 	
 	@PutMapping("/{id}")

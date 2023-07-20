@@ -13,7 +13,7 @@ public interface PilotService {
 	Pilot findById(Integer id);
 	Pilot update(Pilot piloto);
 	void delete(Integer id);
-	List<Pilot> findByName(String name);
+	List<Pilot> findByNameStartingWithIgnoreCase(String name);
 	List<Pilot> findByCountry(Country pais);
 	List<Pilot> findByTeam(Team equipe);
 

@@ -12,7 +12,7 @@ import br.com.trier.spring.domain.Pilot;
 @Repository
 public interface PilotRepository extends JpaRepository<Pilot, Integer>{
 	
-	List<Pilot> findByName(String name);
+	List<Pilot> findByNameStartingWithIgnoreCase(String name);
 	List<Pilot> findByCountry(Country country);
 	List<Pilot> findByTeam(Team team);
 

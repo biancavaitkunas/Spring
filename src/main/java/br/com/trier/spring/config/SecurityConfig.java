@@ -41,7 +41,7 @@ public class SecurityConfig {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(List.of("http://localhost:4200"));
 		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT"));
-		configuration.setAllowedHeaders(List.of("Content-Type", "Authorization"));
+		configuration.setAllowedHeaders(List.of("Content-Type"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
@@ -50,10 +50,10 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable()
-				.authorizeHttpRequests().requestMatchers("/auth/**").permitAll()//permite acesso ao q ta no pacote auth
+				.authorizeHttpRequests().requestMatchers("/**").permitAll()//permite acesso ao q ta no pacote auth
 				.and()
-				.authorizeHttpRequests().anyRequest().authenticated()//o restante requer autenticacao
-				.and()
+				//.authorizeHttpRequests().anyRequest().authenticated()//o restante requer autenticacao
+				//.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//nao mantem dados de sessao
 				.and()
 				.authenticationProvider(authenticationProvider())
